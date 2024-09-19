@@ -1,6 +1,3 @@
-### README for Simple React Native Browser
-
-```markdown
 # Simple React Native Browser
 
 This project is a basic **web browser** built with **React Native** using the Expo framework. It provides minimal functionality but serves as a solid foundation for future customizations and enhancements.
@@ -56,6 +53,3 @@ Feel free to explore the codebase and make changes to fit your needs!
 ## License
 
 This project is open-source and licensed under the MIT License. Contributions and pull requests are welcome!
-```
-
-This README provides a brief overview of the project, instructions for installation, and suggestions for future improvements, making it suitable for a GitHub repository.
