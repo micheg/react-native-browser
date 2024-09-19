@@ -986,3 +986,8 @@ When the app starts:
 In this article, we've walked through the UI construction of our simple web browser using React Native. By understanding each component and how it interacts with the state, you now have the knowledge to customize and extend the browser's functionality further.
 
 Building this browser has provided practical insights into React Native development, state management with Zustand, and the integration of web content through `WebView`. Whether you're looking to expand this project or apply these concepts to other applications, the skills gained here are valuable additions to your developer toolkit.
+
+## Links:
+
+- You can find the project on GitHub at this address: [https://github.com/micheg/react-native-browser/](https://github.com/micheg/react-native-browser/).
+- You can test the project live on Snack at the following URL: [https://snack.expo.dev/@michelangelog79/web-browser?platform=android](https://snack.expo.dev/@michelangelog79/web-browser?platform=android).
