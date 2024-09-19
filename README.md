@@ -12,7 +12,7 @@ This project is a basic **web browser** built with **React Native** using the Ex
 
 ## The running application
 
-![web shot ios](https://github.com/user-attachments/assets/9e12c16f-5f91-49d5-b0b6-70b0adfa6f62)
+![web shot ios](https://github.com/user-attachments/assets/781894b4-90f7-48c9-98de-0f6582e25f11)
 
 ## Installation
 
