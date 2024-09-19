@@ -708,64 +708,78 @@ export default WebBrowser;
 
 #### **Explanation**
 
-1. **Import Statements**
+The component begins with several essential import statements. `React`, `useRef`, and `useEffect` are brought in for managing component logic and lifecycle events. Various React Native components like `View`, `TextInput`, and `TouchableOpacity` are used to construct the UI, while `WebView` from `react-native-webview` is used to display web content. `MaterialIcons` from `@expo/vector-icons` provides navigation icons, and `useBrowserStore` from the Zustand store is used for state management. The `HistoryComponent` is also imported to show browsing history.
 
-   - **React and Hooks**: Import `React`, `useRef`, and `useEffect` for component logic and lifecycle management.
-   - **React Native Components**: Import various components like `View`, `TextInput`, `TouchableOpacity`, etc.
-   - **WebView**: Import `WebView` from `react-native-webview` to render web content.
-   - **Icons**: Use `MaterialIcons` from `@expo/vector-icons` for navigation icons.
-   - **State Management**: Import `useBrowserStore` from the Zustand store.
-   - **History Component**: Import `HistoryComponent` for displaying browsing history.
+State variables and actions are extracted from the store with `useBrowserStore()`, and a `webviewRef` is created for controlling the `WebView` component. Key navigation functions include `goBack()`, `goForward()`, and `reloadPage()`, which handle back/forward navigation and page reloading. The URL submission is managed by `onSubmitEditing()`, which formats the URL and updates the store's `webUrl`.
 
-2. **State and Actions**
+When the web view navigates to a new page, `onNavigationStateChange()` updates the app's state with the current URL, navigation capabilities, and history. An `useEffect` hook listens for the hardware back button on Android, navigating back within the web view when possible.
 
-   Destructure the necessary state variables and actions from the store using `useBrowserStore()`.
+The app conditionally renders either the browser UI or the history component, depending on the value of `showHistory`. The navigation bar features buttons for back and forward navigation, a `TextInput` field for entering URLs, and additional buttons for refreshing the page and accessing the browsing history. The buttons are interactive and are disabled when back or forward navigation is unavailable.
 
-3. **Refs**
+When the web content is loading, an `ActivityIndicator` is displayed, signaling that the page is in the process of loading. The `WebView` component itself renders the web content and listens for changes in navigation state to update the app's internal state.
 
-   - **webviewRef**: A reference to the `WebView` component, used for controlling navigation.
+Finally, `StyleSheet` is used to style components such as the navigation bar, buttons, and loading indicators, ensuring that the UI is clean and user-friendly.
 
-4. **Navigation Functions**
+in detail:
 
-   - **goBack()**: Navigates back in the web history if possible.
-   - **goForward()**: Navigates forward in the web history if possible.
-   - **reloadPage()**: Reloads the current web page.
+**Import Statements**
 
-5. **URL Submission Handling**
+  - **React and Hooks**: Import `React`, `useRef`, and `useEffect` for component logic and lifecycle management.
+  - **React Native Components**: Import various components like `View`, `TextInput`, `TouchableOpacity`, etc.
+  - **WebView**: Import `WebView` from `react-native-webview` to render web content.
+  - **Icons**: Use `MaterialIcons` from `@expo/vector-icons` for navigation icons.
+  - **State Management**: Import `useBrowserStore` from the Zustand store.
+  - **History Component**: Import `HistoryComponent` for displaying browsing history.
 
-   - **onSubmitEditing()**: Handles the event when the user submits the URL in the input field. It ensures that the URL is correctly formatted and updates `webUrl` in the store.
+**State and Actions**
 
-6. **Navigation State Change**
+Destructure the necessary state variables and actions from the store using `useBrowserStore()`.
 
-   - **onNavigationStateChange(navState)**: Updates the state based on the navigation state of the `WebView`, such as updating `inputUrl`, `canGoBack`, `canGoForward`, and adding the URL to history.
+**Refs**
 
-7. **Back Button Handling**
+- **webviewRef**: A reference to the `WebView` component, used for controlling navigation.
 
-   - **useEffect Hook**: Listens for the hardware back button press on Android devices. If the web view can go back, it navigates back; otherwise, it allows the default behavior.
+**Navigation Functions**
 
-8. **Conditional Rendering**
+- **goBack()**: Navigates back in the web history if possible.
+- **goForward()**: Navigates forward in the web history if possible.
+- **reloadPage()**: Reloads the current web page.
 
-   - **showHistory**: If `showHistory` is `false`, the browser UI is rendered. If `true`, the `HistoryComponent` is displayed.
+**URL Submission Handling**
 
-9. **Navigation Bar**
+- **onSubmitEditing()**: Handles the event when the user submits the URL in the input field. It ensures that the URL is correctly formatted and updates `webUrl` in the store.
 
-   - **Back and Forward Buttons**: Use `TouchableOpacity` and `MaterialIcons` to create interactive buttons, which are disabled based on `canGoBack` and `canGoForward`.
-   - **URL Input Field**: A `TextInput` component bound to `inputUrl`, allowing the user to enter and submit URLs.
-   - **Refresh and History Buttons**: Additional navigation controls.
+**Navigation State Change**
 
-10. **Loading Indicator**
+- **onNavigationStateChange(navState)**: Updates the state based on the navigation state of the `WebView`, such as updating `inputUrl`, `canGoBack`, `canGoForward`, and adding the URL to history.
 
-    - Displays an `ActivityIndicator` when `isLoading` is `true`.
+**Back Button Handling**
 
-11. **WebView Component**
+- **useEffect Hook**: Listens for the hardware back button press on Android devices. If the web view can go back, it navigates back; otherwise, it allows the default behavior.
 
-    - Renders the web content based on `webUrl`.
-    - Uses `webviewRef` for navigation control.
-    - Listens to navigation state changes to update the store.
+**Conditional Rendering**
 
-12. **Styling**
+- **showHistory**: If `showHistory` is `false`, the browser UI is rendered. If `true`, the `HistoryComponent` is displayed.
 
-    - Uses `StyleSheet` to style components such as the navigation bar, buttons, and loading indicator.
+**Navigation Bar**
+
+- **Back and Forward Buttons**: Use `TouchableOpacity` and `MaterialIcons` to create interactive buttons, which are disabled based on `canGoBack` and `canGoForward`.
+- **URL Input Field**: A `TextInput` component bound to `inputUrl`, allowing the user to enter and submit URLs.
+- **Refresh and History Buttons**: Additional navigation controls.
+
+**Loading Indicator**
+
+- Displays an `ActivityIndicator` when `isLoading` is `true`.
+
+**WebView Component**
+
+- Renders the web content based on `webUrl`.
+- Uses `webviewRef` for navigation control.
+- Listens to navigation state changes to update the store.
+
+**Styling**
+
+- Uses `StyleSheet` to style components such as the navigation bar, buttons, and loading indicator.
 
 ### **History.jsx**
 
@@ -905,37 +919,52 @@ export default HistoryComponent;
 
 #### **Explanation**
 
-1. **Import Statements**
 
-   - **React and Components**: Import necessary components like `View`, `Text`, `TouchableOpacity`, etc.
-   - **Icons**: Use `MaterialIcons` for the close button.
-   - **Constants**: Import `Constants` from `expo-constants` for status bar height.
-   - **State Management**: Import `useBrowserStore` from the Zustand store.
+The component begins by importing the necessary components, including `View`, `Text`, and `TouchableOpacity` from React Native. `MaterialIcons` is used for the close button, and `Constants` from `expo-constants` provides the status bar height. State management is handled by `useBrowserStore` from the Zustand store.
 
-2. **State and Actions**
+Key state variables and actions such as `history`, `setWebUrl`, `setInputUrl`, `setShowHistory`, and `clearHistory` are destructured from the store.
 
-   Destructure `history`, `setWebUrl`, `setInputUrl`, `setShowHistory`, and `clearHistory` from the store.
+Two primary functions manage interactions: `loadFromHistory(url)` navigates to the selected URL from the history and closes the history view, while `confirmClearHistory()` displays an alert to confirm the action before clearing the browsing history.
 
-3. **Functions**
+The component structure consists of a header with the title "History" and a close button for exiting the history view. The history list is rendered using a `ScrollView`, displaying the stored URLs, which users can tap to revisit. A "Clear History" button is provided at the bottom, and it is disabled when the history is empty.
 
-   - **loadFromHistory(url)**: Navigates to the selected URL from history and closes the history view.
-   - **confirmClearHistory()**: Displays an alert to confirm the action before clearing the history.
+Styling is done with `StyleSheet`, defining styles for the container, header, list items, and buttons. Dynamic styles are applied to the "Clear History" button, where `styles.disabledButton` visually indicates when the button is disabled.
 
-4. **Component Structure**
+User interactions are handled by `TouchableOpacity` for clickable elements, and an `Alert` is used to provide a confirmation dialog before clearing the history, ensuring accidental deletion is avoided.
 
-   - **Header**: Contains the title "History" and a close button to exit the history view.
-   - **History List**: A `ScrollView` that lists the URLs from `history`, allowing the user to tap on any to revisit.
-   - **Clear History Button**: A button at the bottom to clear the browsing history, which is disabled when the history is empty.
+in detail:
 
-5. **Styling**
+**Import Statements**
 
-   - Uses `StyleSheet` to style the container, header, list items, and buttons.
-   - **Dynamic Styles**: Applies `styles.disabledButton` when the history is empty to visually indicate the button is disabled.
+- **React and Components**: Import necessary components like `View`, `Text`, `TouchableOpacity`, etc.
+- **Icons**: Use `MaterialIcons` for the close button.
+- **Constants**: Import `Constants` from `expo-constants` for status bar height.
+- **State Management**: Import `useBrowserStore` from the Zustand store.
 
-6. **User Interaction**
+**State and Actions**
 
-   - **TouchableOpacity**: Used for interactive elements like list items and buttons.
-   - **Alert**: Provides a confirmation dialog before clearing history to prevent accidental deletion.
+- Destructure `history`, `setWebUrl`, `setInputUrl`, `setShowHistory`, and `clearHistory` from the store.
+
+**Functions**
+
+- **loadFromHistory(url)**: Navigates to the selected URL from history and closes the history view.
+- **confirmClearHistory()**: Displays an alert to confirm the action before clearing the history.
+
+**Component Structure**
+
+- **Header**: Contains the title "History" and a close button to exit the history view.
+- **History List**: A `ScrollView` that lists the URLs from `history`, allowing the user to tap on any to revisit.
+- **Clear History Button**: A button at the bottom to clear the browsing history, which is disabled when the history is empty.
+
+**Styling**
+
+- Uses `StyleSheet` to style the container, header, list items, and buttons.
+- **Dynamic Styles**: Applies `styles.disabledButton` when the history is empty to visually indicate the button is disabled.
+
+**User Interaction**
+
+- **TouchableOpacity**: Used for interactive elements like list items and buttons.
+- **Alert**: Provides a confirmation dialog before clearing history to prevent accidental deletion.
 
 ### **Integration with the Store**
 
