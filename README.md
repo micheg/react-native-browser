@@ -10,6 +10,10 @@ This project is a basic **web browser** built with **React Native** using the Ex
 - **Async Storage**: Stores basic user preferences or data using `@react-native-async-storage/async-storage`.
 - **State Management**: Utilizes `Zustand` for lightweight state management, allowing easy scalability as the project grows.
 
+## The running application
+
+![web shot ios](https://github.com/user-attachments/assets/9e12c16f-5f91-49d5-b0b6-70b0adfa6f62)
+
 ## Installation
 
 To get started, clone the repository and install the required dependencies.
