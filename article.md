@@ -1,5 +1,11 @@
 # **Building a Simple Web Browser with React Native: An Introduction**
 
+**Intro**
+
+This article is quite extensive, but for good reason: it covers important, non-trivial topics and provides a detailed walkthrough of building a **fully functional app** from start to finish. Although the app itself is simple in nature, every part of its code is carefully explained, making it an excellent reference for developers who want to understand the complete lifecycle of a React Native project.
+
+By the end of this article, you'll not only have a working app but also a solid understanding of how to customize and expand upon it for more complex applications.
+
 **Prerequisites**
 
 ### Setting Up an Expo Project for the Web Browser and Required Dependencies
